@@ -18,9 +18,8 @@ from rag.ingest import (
 )
 
 
-# -----------------------------
 # Session State Initialization
-# -----------------------------
+
 
 if "current_pdf" not in st.session_state:
     st.session_state["current_pdf"] = ""
@@ -29,9 +28,7 @@ if "chat_history" not in st.session_state:
     st.session_state["chat_history"] = []
 
 
-# -----------------------------
 # Page Config
-# -----------------------------
 
 st.set_page_config(
     page_title="AI Research Assistant"
@@ -42,9 +39,8 @@ st.title(
 )
 
 
-# -----------------------------
 # PDF Upload
-# -----------------------------
+
 
 uploaded_file = st.file_uploader(
     "Upload PDF",
@@ -70,16 +66,14 @@ if uploaded_file:
         )
 
 
-# -----------------------------
 # Render Chat History
-# -----------------------------
 
 for message in st.session_state["chat_history"]:
 
     with st.chat_message(message["role"]):
         st.write(message["content"])
     
-    if (
+        if (
             message["role"] == "assistant"
             and message.get(
                 "retrieved_chunks"
@@ -97,9 +91,7 @@ for message in st.session_state["chat_history"]:
                     st.write(chunk)
 
 
-# -----------------------------
 # Chat Input
-# -----------------------------
 
 query = st.chat_input(
     "Ask a question"
@@ -149,22 +141,6 @@ if query:
 
     answer = result["final_answer"]
 
-    if isinstance(answer, list):
-
-        if len(answer) > 0:
-
-            if isinstance(answer[0], dict):
-                answer = answer[0].get(
-                    "text",
-                    str(answer)
-                )
-
-            else:
-                answer = str(answer[0])
-
-        else:
-            answer = "No response generated."
-
     # Store Assistant Message
     st.session_state["chat_history"].append(
         {
@@ -178,15 +154,4 @@ if query:
     with st.chat_message("assistant"):
         st.write(answer)
 
-    # Retrieved Context
-    if result.get("retrieved_chunks"):
-
-        with st.expander(
-            "Retrieved Context"
-        ):
-
-            for chunk in result[
-                "retrieved_chunks"
-            ]:
-
-                st.write(chunk)
+    

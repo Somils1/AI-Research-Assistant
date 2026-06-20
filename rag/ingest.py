@@ -16,7 +16,12 @@ from langchain_huggingface import HuggingFaceEmbeddings
 def save_uploaded_pdf(
     uploaded_file
 ):
-
+    
+    os.makedirs(
+        "data",
+        exist_ok=True
+    ) 
+    
     save_path = os.path.join(
         "data",
         uploaded_file.name

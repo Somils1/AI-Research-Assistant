@@ -152,6 +152,19 @@ if query:
 
     # Display Assistant Message
     with st.chat_message("assistant"):
-        st.write(answer)
+     st.write(answer)
+     
+    if result.get("retrieved_chunks"):
+
+        with st.expander(
+            "Retrieved Context"
+        ):
+
+            for chunk in result[
+                "retrieved_chunks"
+            ]:
+
+                st.write(chunk)
+    
 
     

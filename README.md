@@ -286,29 +286,6 @@ Disadvantages:
 
 ---
 
-## Two Agents vs Three Agents
-
-A simpler architecture could combine retrieval and reasoning into a single agent.
-
-This project uses:
-
-* Coordinator Agent
-* Retriever Agent
-* General Agent
-* Synthesizer Agent
-
-Advantages:
-
-* Clear separation of concerns
-* Better maintainability
-* Easier debugging
-
-Tradeoff:
-
-* Slightly increased orchestration complexity
-
----
-
 ## MMR vs Similarity Search
 
 ### MMR
